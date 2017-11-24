@@ -1,0 +1,45 @@
+<html>
+
+<head></head>
+<style>
+    textarea {
+        height: 250px;
+        width: 250px;
+    }
+    .output {
+        margin-left: 40px;
+    }
+</style>
+
+<body>
+    Enter object in JSON format <textarea class="input" value=>{"a":"hi","b":"bye","c":[1,2,4],"d":{"xyz":"xyz"}}</textarea>
+    remove repeated values ?<input class="chk" type="checkbox">
+    <button onclick="goClicked()">Go</button>
+    <textarea class="output"></textarea>
+
+
+    <script type="text/javascript" src="Object.allKeys.js"></script>
+    <script type="text/javascript">
+        (function(){
+            var defalut = '{\n    "a":"hi",\n    "b":"bye",\n    "c":[1,2,4],\n    "d":{"xyz":"xyz"}\n}';
+            document.getElementsByClassName("input")[0].value = defalut;
+        })();
+        var goClicked = function() {
+            var inputStr = document.getElementsByClassName("input")[0].value,
+                removeRepeated = document.getElementsByClassName("chk")[0].checked,
+                inputObj,
+                outputObj,
+                outputStr;
+            try{
+                inputObj = JSON.parse(inputStr);
+                outputObj = Object.allKeys(inputObj, removeRepeated);
+                outputStr = JSON.stringify(outputObj);
+            } catch(e) {
+                outputStr = e.stack;
+            }
+            
+            document.getElementsByClassName("output")[0].value = outputStr.split(',').join(',\n');
+        }
+    </script>
+</body>
+</htlm>
